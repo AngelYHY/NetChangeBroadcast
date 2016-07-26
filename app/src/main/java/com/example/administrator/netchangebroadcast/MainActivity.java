@@ -34,27 +34,26 @@ public class MainActivity extends AppCompatActivity {
             //管理网络连接的系统服务类
             ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo info = manager.getActiveNetworkInfo();
-            NetworkInfo.State gprs = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState();
-            NetworkInfo.State wifi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState();
+            //方法过时
+//            NetworkInfo.State gprs = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState();
+//            NetworkInfo.State wifi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState();
             //判断网络是否有网络
             //判断gprs或者wifi是否是已连接状态
-            if (info == null || !info.isAvailable()) {
-                Log.d("FreeStar", "onReceive→→→网络不可用");
-            } else if (gprs == NetworkInfo.State.CONNECTED) {
-                Log.d("FreeStar", "onReceive→→→：已连接gprs");
-            } else if (wifi == NetworkInfo.State.CONNECTED) {
-                Log.d("FreeStar", "onReceive→→→：已连接wifi");
-            }
-            //判断网络是否有网络
-//            if (info != null && info.isAvailable()) {
-////                Toast.makeText(context, "network is Available", Toast.LENGTH_SHORT).show();
-//                Log.d("FreeStar", "onReceive→→→网络可用");
-//            } else {
-////                Toast.makeText(context, "network is unAvailable", Toast.LENGTH_SHORT).show();
+//            if (info == null || !info.isAvailable()) {
 //                Log.d("FreeStar", "onReceive→→→网络不可用");
+//            } else if (gprs == NetworkInfo.State.CONNECTED) {
+//                Log.d("FreeStar", "onReceive→→→：已连接gprs");
+//            } else if (wifi == NetworkInfo.State.CONNECTED) {
+//                Log.d("FreeStar", "onReceive→→→：已连接wifi");
 //            }
+            //info.getTypeName()可得到网络类型
+            if (info != null && info.isAvailable()) {
+                String name = info.getTypeName();
+                Log.d("FreeStar", "当前网络名称：" + name);
+            } else {
+                Log.d("FreeStar", "没有可用网络");
+            }
         }
-
     }
 
     @Override

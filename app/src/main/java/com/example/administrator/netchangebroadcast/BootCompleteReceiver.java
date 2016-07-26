@@ -12,13 +12,15 @@ import android.widget.Toast;
 public class BootCompleteReceiver extends BroadcastReceiver {
     //静态注册广播，需要在清单文件中注册
 
-    static final String ACTION_BOOT="android.intent.action.BOOT_COMPLETED";
+    static final String ACTION_BOOT = "android.intent.action.BOOT_COMPLETED";
+
     @Override
     public void onReceive(Context context, Intent intent) {
         Toast.makeText(context, "Boot Complete", Toast.LENGTH_SHORT).show();
         Log.d("FreeStar", "onReceive→→→：Boot Complete");
         if (intent.getAction().equals(ACTION_BOOT)) {
             Intent intent1 = new Intent(context, MainActivity.class);
+            //这个activity会成为历史stack中一个新task的开始
             intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent1);
         }
